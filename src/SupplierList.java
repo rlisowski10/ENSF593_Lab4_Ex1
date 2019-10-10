@@ -7,4 +7,8 @@ public class SupplierList {
   public SupplierList(ArrayList<Supplier> supplierList) {
     this.supplierList = supplierList;
   }
+
+  public ArrayList<Supplier> getSupplierList() {
+    return supplierList;
+  }
 }

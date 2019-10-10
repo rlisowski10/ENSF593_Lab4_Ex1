@@ -10,8 +10,8 @@ public class FileManager {
   // Public Instance Methods
   // ============================================================
 
-  public ArrayList<Supplier> loadSupplierList() {
-    ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+  public SupplierList loadSupplierList() {
+    ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
     String supplierFilePath = "./resources/suppliers.txt";
     String[] supplierFileContents = fileReader(supplierFilePath).split("\r\n");
 
@@ -24,15 +24,16 @@ public class FileManager {
       String contact = supplierInfo[3];
 
       Supplier supplier = new Supplier(id, name, address, contact);
-      supplierList.add(supplier);
+      suppliers.add(supplier);
     }
 
+    SupplierList supplierList = new SupplierList(suppliers);
     return supplierList;
   }
 
-  public Inventory loadInventory(ArrayList<Supplier> supplierList) {
-
+  public Inventory loadInventory(SupplierList supplierList) {
     ArrayList<Tool> toolList = new ArrayList<Tool>();
+    ArrayList<Supplier> suppliers = supplierList.getSupplierList();
 
     String inventoryFilePath = "./resources/items.txt";
     String[] inventoryFileContents = fileReader(inventoryFilePath).split("\r\n");
@@ -44,7 +45,7 @@ public class FileManager {
       String name = inventoryInfo[1];
       int quantity = Integer.parseInt(inventoryInfo[2]);
       double price = Double.parseDouble(inventoryInfo[3]);
-      Supplier supplier = findSupplier(inventoryInfo[4], supplierList);
+      Supplier supplier = findSupplier(inventoryInfo[4], suppliers);
 
       Tool tool = new Tool(id, name, quantity, price, supplier);
       toolList.add(tool);
@@ -89,11 +90,11 @@ public class FileManager {
   // Static Methods
   // ============================================================
 
+  // Unit test to ensure FileManager outputs.
   public static void main(String[] args) throws FileNotFoundException {
     FileManager fileManager = new FileManager();
-    ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
 
-    supplierList = fileManager.loadSupplierList();
+    SupplierList supplierList = fileManager.loadSupplierList();
     fileManager.loadInventory(supplierList);
   }
 }
