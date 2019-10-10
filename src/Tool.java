@@ -65,4 +65,14 @@ public class Tool {
   public void setId(int id) {
     this.id = id;
   }
+
+  // ============================================================
+  // Public Instance Methods
+  // ============================================================
+
+  @Override
+  public String toString() {
+    String toolToString = getName() + " ($" + String.format("%.2f", getPrice()) + ")\n";
+    return toolToString;
+  }
 }

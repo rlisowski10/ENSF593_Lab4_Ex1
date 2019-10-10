@@ -22,7 +22,10 @@ public class Inventory {
 
   @Override
   public String toString() {
+    String inventoryToString = "List of tools in inventory: \n\n";
+    for (Tool tool : toolList)
+      inventoryToString += tool;
 
-    return "Test";
+    return inventoryToString;
   }
 }

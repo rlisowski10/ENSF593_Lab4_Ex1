@@ -17,20 +17,24 @@ public class ToolStoreApp {
     FileManager fileManager = new FileManager();
     Shop shop = fileManager.loadShop();
 
-    clearConsole();
     while (showMenu) {
+      clearConsole();
       System.out.println("Welcome to the RobCo Industries Supply Management System:");
-      System.out.print("\n1. [In Progress] List all tools" + "\n2. [Pending] Search for tool by tool name"
-          + "\n3. [Pending] Search for tool by ID" + "\n4. [Pending] Check item quantity"
-          + "\n5. [Pending] Add new tool" + "\n6. [Pending] Remove existing tool"
-          + "\n7. [Pending] Decrease item quantity" + "\n8. Quit" + "\n\nPlease enter a number from the list: ");
+      System.out.print(
+          "\n1. List all tools" + "\n2. [Pending] Search for tool by tool name" + "\n3. [Pending] Search for tool by ID"
+              + "\n4. [Pending] Check item quantity" + "\n5. [Pending] Decrease item quantity"
+              + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
+
+      // TODO Add a note to the TA in the Front-end describing how to use the program.
 
       showMenu = scanMenuInput(scan, showMenu, shop);
 
       if (showMenu) {
         System.out.println("\n*** Press enter to return to the menu. ***");
         scan.nextLine();
+      } else {
         scan.close();
+        break;
       }
     }
   }
@@ -57,7 +61,7 @@ public class ToolStoreApp {
     case "1":
       listAllTools(shop);
       break;
-    case "8":
+    case "7":
       System.out.println("\n*** Application Terminated ***\n");
       showMenu = false;
       break;
