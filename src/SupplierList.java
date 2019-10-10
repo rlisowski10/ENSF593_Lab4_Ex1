@@ -5,10 +5,10 @@ public class SupplierList {
   private ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
 
   public SupplierList(ArrayList<Supplier> supplierList) {
-    this.supplierList = supplierList;
+    this.setSupplierList(supplierList);
   }
 
-  public ArrayList<Supplier> getSupplierList() {
-    return supplierList;
+  public void setSupplierList(ArrayList<Supplier> supplierList) {
+    this.supplierList = supplierList;
   }
 }

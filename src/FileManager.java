@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.io.FileNotFoundException;
 
 public class FileManager {
 
@@ -10,7 +9,20 @@ public class FileManager {
   // Public Instance Methods
   // ============================================================
 
-  public SupplierList loadSupplierList() {
+  public Shop loadShop() {
+    ArrayList<Supplier> suppliers = loadSupplierList();
+    SupplierList supplierList = new SupplierList(suppliers);
+    Inventory inventory = loadInventory(suppliers);
+
+    Shop shop = new Shop(supplierList, inventory);
+    return shop;
+  }
+
+  // ============================================================
+  // Private Instance Methods
+  // ============================================================
+
+  private ArrayList<Supplier> loadSupplierList() {
     ArrayList<Supplier> suppliers = new ArrayList<Supplier>();
     String supplierFilePath = "./resources/suppliers.txt";
     String[] supplierFileContents = fileReader(supplierFilePath).split("\r\n");
@@ -27,13 +39,11 @@ public class FileManager {
       suppliers.add(supplier);
     }
 
-    SupplierList supplierList = new SupplierList(suppliers);
-    return supplierList;
+    return suppliers;
   }
 
-  public Inventory loadInventory(SupplierList supplierList) {
+  private Inventory loadInventory(ArrayList<Supplier> suppliers) {
     ArrayList<Tool> toolList = new ArrayList<Tool>();
-    ArrayList<Supplier> suppliers = supplierList.getSupplierList();
 
     String inventoryFilePath = "./resources/items.txt";
     String[] inventoryFileContents = fileReader(inventoryFilePath).split("\r\n");
@@ -54,10 +64,6 @@ public class FileManager {
     Inventory inventory = new Inventory(toolList);
     return inventory;
   }
-
-  // ============================================================
-  // Private Instance Methods
-  // ============================================================
 
   private String fileReader(String filePath) {
     String fileContent = "";
@@ -84,17 +90,5 @@ public class FileManager {
     }
 
     return matchingSupplier;
-  }
-
-  // ============================================================
-  // Static Methods
-  // ============================================================
-
-  // Unit test to ensure FileManager outputs.
-  public static void main(String[] args) throws FileNotFoundException {
-    FileManager fileManager = new FileManager();
-
-    SupplierList supplierList = fileManager.loadSupplierList();
-    fileManager.loadInventory(supplierList);
   }
 }

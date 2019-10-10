@@ -14,17 +14,8 @@ public class ToolStoreApp {
     Scanner scan = new Scanner(System.in);
     boolean showMenu = true;
 
-    // Create a new Shop object, providing SupplierList and Inventory objects from
-    // the FileManager. These arguments are necessary to ensure that ToolStoreApp
-    // has dependency relationships only with Shop and FileManager.
     FileManager fileManager = new FileManager();
-
-    // Oct 10 9:16am: The front-end is dependent on SupplierList, which is not
-    // permitted. So I will instead have to return a Shop object from FileManager,
-    // which is great anyways, since that will allow FileManager to take care of
-    // back-end dependencies instead of the front-end class.
-    SupplierList supplierList = fileManager.loadSupplierList();
-    Shop shop = new Shop(supplierList, fileManager.loadInventory(supplierList));
+    Shop shop = fileManager.loadShop();
 
     clearConsole();
     while (showMenu) {
