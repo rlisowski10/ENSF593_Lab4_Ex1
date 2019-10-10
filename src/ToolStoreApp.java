@@ -25,7 +25,7 @@ public class ToolStoreApp {
           + "\n5. [Pending] Add new tool" + "\n6. [Pending] Remove existing tool"
           + "\n7. [Pending] Decrease item quantity" + "\n8. Quit" + "\n\nPlease enter a number from the list: ");
 
-      showMenu = scanMenuInput(scan, showMenu);
+      showMenu = scanMenuInput(scan, showMenu, shop);
 
       if (showMenu) {
         System.out.println("\n*** Press enter to return to the menu. ***");
@@ -48,14 +48,14 @@ public class ToolStoreApp {
       System.out.println("");
   }
 
-  private boolean scanMenuInput(Scanner scan, boolean showMenu) {
+  private boolean scanMenuInput(Scanner scan, boolean showMenu, Shop shop) {
     String userInput;
     userInput = scan.nextLine();
     userInput = userInput.replaceAll("\\W", "");
 
     switch (userInput) {
     case "1":
-      // addPassengerUI(scan);
+      listAllTools(shop);
       break;
     case "8":
       System.out.println("\n*** Application Terminated ***\n");
@@ -63,6 +63,11 @@ public class ToolStoreApp {
       break;
     }
     return showMenu;
+  }
+
+  private void listAllTools(Shop shop) {
+    clearConsole();
+    shop.displayToolList();
   }
 
   // ============================================================

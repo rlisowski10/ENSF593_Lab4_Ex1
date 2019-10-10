@@ -1,10 +1,18 @@
 public class Tool {
 
+  // ============================================================
+  // Member Variables
+  // ============================================================
+
   private int id;
   private String name;
   private int quantity;
   private double price;
   private Supplier supplier;
+
+  // ============================================================
+  // Constructors
+  // ============================================================
 
   Tool(int id, String name, int quantity, double price, Supplier supplier) {
     this.setId(id);
@@ -13,6 +21,10 @@ public class Tool {
     this.setPrice(price);
     this.setSupplier(supplier);
   }
+
+  // ============================================================
+  // Accessors
+  // ============================================================
 
   public Supplier getSupplier() {
     return supplier;

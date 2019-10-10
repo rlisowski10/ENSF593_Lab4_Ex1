@@ -1,8 +1,17 @@
 public class Supplier {
+
+  // ============================================================
+  // Member Variables
+  // ============================================================
+
   private int id;
   private String name;
   private String address;
   private String contact;
+
+  // ============================================================
+  // Constructors
+  // ============================================================
 
   public Supplier(int id, String name, String address, String contact) {
     this.setId(id);
@@ -10,6 +19,10 @@ public class Supplier {
     this.setAddress(address);
     this.setContact(contact);
   }
+
+  // ============================================================
+  // Accessors
+  // ============================================================
 
   public String getContact() {
     return contact;
