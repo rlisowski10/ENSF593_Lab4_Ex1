@@ -15,7 +15,7 @@ public class FileManager {
     ArrayList<Tool> toolList = new ArrayList<Tool>();    
     String supplierFilePath = "./resources/suppliers.txt";
     String toolsFilePath = "./resources/items.txt";
-
+    int var = 1;
   }
 
   public void fileReader(String filePath) {
