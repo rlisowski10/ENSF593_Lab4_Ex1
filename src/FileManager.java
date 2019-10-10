@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.io.FileNotFoundException;
 
 public class FileManager {
 
@@ -12,29 +12,24 @@ public class FileManager {
 
   public void populateLists() throws FileNotFoundException {
     ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
-    ArrayList<Tool> toolList = new ArrayList<Tool>();    
+    ArrayList<Tool> toolList = new ArrayList<Tool>();
     String supplierFilePath = "./resources/suppliers.txt";
     String toolsFilePath = "./resources/items.txt";
-    int var = 1;
+
+    String supplierTextContent = fileReader(supplierFilePath);
   }
 
-  public void fileReader(String filePath) {
-    Scanner textScanner;
+  public String fileReader(String filePath) {
+    String fileContent = "";
 
     try {
-      String[] itemInfoSplit;
-      File file = new File(filePath);
-      textScanner = new Scanner(file);
-
-      while (textScanner.hasNextLine()) {
-        itemInfoSplit = textScanner.nextLine().split(";");
-        System.out.println(itemInfoSplit[1]);
-      }
-
-      textScanner.close();
+      Path filepath = Paths.get(filePath);
+      fileContent = Files.readString(filepath);
     } catch (Exception e) {
       System.out.println("Error: " + filePath + " could not be read.");
     }
+
+    return fileContent;
   }
 
   // ============================================================
@@ -47,6 +42,6 @@ public class FileManager {
 
   public static void main(String[] args) throws FileNotFoundException {
     FileManager fileManager = new FileManager();
-    fileManager.populateToolList();
+    fileManager.populateLists();
   }
 }

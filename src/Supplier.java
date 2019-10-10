@@ -1,8 +1,8 @@
 public class Supplier {
-  int id;
-  String name;
-  String address;
-  String contact;
+  private int id;
+  private String name;
+  private String address;
+  private String contact;
 
   public Supplier(int id, String name, String address, String contact) {
     this.id = id;

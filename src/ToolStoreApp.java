@@ -9,7 +9,8 @@ public class ToolStoreApp {
   public void displayMenu() {
     Scanner scan = new Scanner(System.in);
     boolean showMenu = true;
-    loadData();
+    FileManager fileManager = new FileManager();
+    
 
     clearConsole();
     while (showMenu) {
@@ -57,10 +58,6 @@ public class ToolStoreApp {
       break;
     }
     return showMenu;
-  }
-
-  private void loadData() {
-    
   }
 
   // ============================================================
