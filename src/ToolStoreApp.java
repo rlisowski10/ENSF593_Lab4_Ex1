@@ -10,7 +10,8 @@ public class ToolStoreApp {
     Scanner scan = new Scanner(System.in);
     boolean showMenu = true;
     FileManager fileManager = new FileManager();
-    
+    // TODO Create a Shop object, and construct using the FileManager methods for
+    // Inventory and SupplierList.
 
     clearConsole();
     while (showMenu) {
