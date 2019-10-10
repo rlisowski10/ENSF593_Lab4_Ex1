@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+  // TODO JavaDocs
+  // TODO Ensure all member variables calls are through getter/setter
+  // TODO Consider security throughout
+
 public class ToolStoreApp {
 
   // ============================================================
@@ -10,8 +14,11 @@ public class ToolStoreApp {
     Scanner scan = new Scanner(System.in);
     boolean showMenu = true;
     FileManager fileManager = new FileManager();
+    
+    // ****** CURRENT LOCATION!!! *******
     // TODO Create a Shop object, and construct using the FileManager methods for
     // Inventory and SupplierList.
+
 
     clearConsole();
     while (showMenu) {

@@ -4,8 +4,6 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.FileNotFoundException;
 
-// TODO Create two methods in here (1. return SupplierList 2. return Inventory)
-
 public class FileManager {
 
   // ============================================================
@@ -32,8 +30,9 @@ public class FileManager {
     return supplierList;
   }
 
-  public Inventory loadInventory() {
-    Inventory inventory = new Inventory();
+  public Inventory loadInventory(ArrayList<Supplier> supplierList) {
+
+    ArrayList<Tool> toolList = new ArrayList<Tool>();
 
     String inventoryFilePath = "./resources/items.txt";
     String[] inventoryFileContents = fileReader(inventoryFilePath).split("\r\n");
@@ -43,17 +42,23 @@ public class FileManager {
 
       int id = Integer.parseInt(inventoryInfo[0]);
       String name = inventoryInfo[1];
-      String address = inventoryInfo[2];
-      String contact = inventoryInfo[3];
+      int quantity = Integer.parseInt(inventoryInfo[2]);
+      double price = Double.parseDouble(inventoryInfo[3]);
+      Supplier supplier = findSupplier(inventoryInfo[4], supplierList);
 
-      inventory inventory = new inventory(id, name, address, contact);
-      inventoryList.add(inventory);
+      Tool tool = new Tool(id, name, quantity, price, supplier);
+      toolList.add(tool);
     }
 
+    Inventory inventory = new Inventory(toolList);
     return inventory;
   }
 
-  public String fileReader(String filePath) {
+  // ============================================================
+  // Private Instance Methods
+  // ============================================================
+
+  private String fileReader(String filePath) {
     String fileContent = "";
 
     try {
@@ -66,9 +71,19 @@ public class FileManager {
     return fileContent;
   }
 
-  // ============================================================
-  // Private Instance Methods
-  // ============================================================
+  private Supplier findSupplier(String supplierID, ArrayList<Supplier> supplierList) {
+    int id = Integer.parseInt(supplierID);
+    Supplier matchingSupplier = null;
+
+    for (Supplier supplier : supplierList) {
+      if (id == supplier.getId()) {
+        matchingSupplier = supplier;
+        break;
+      }
+    }
+
+    return matchingSupplier;
+  }
 
   // ============================================================
   // Static Methods
@@ -76,6 +91,9 @@ public class FileManager {
 
   public static void main(String[] args) throws FileNotFoundException {
     FileManager fileManager = new FileManager();
-    fileManager.loadSupplierList();
+    ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+
+    supplierList = fileManager.loadSupplierList();
+    fileManager.loadInventory(supplierList);
   }
 }
