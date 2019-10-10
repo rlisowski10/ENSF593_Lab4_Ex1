@@ -15,4 +15,14 @@ public class Inventory {
   public Inventory(ArrayList<Tool> toolList) {
     this.toolList = toolList;
   }
+
+  // ============================================================
+  // Public Instance Methods
+  // ============================================================
+
+  @Override
+  public String toString() {
+
+    return "Test";
+  }
 }
