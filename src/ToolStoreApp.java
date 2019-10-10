@@ -20,6 +20,7 @@ public class ToolStoreApp {
     // Test 4
     // Test 5
     // Test 6
+    // Test 7
     FileManager fileManager = new FileManager();
     Shop shop = fileManager.loadShop();
 
