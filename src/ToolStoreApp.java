@@ -20,17 +20,16 @@ public class ToolStoreApp {
     while (showMenu) {
       clearConsole();
       System.out.println("Welcome to the RobCo Industries Supply Management System:");
-      System.out.print(
-          "\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. [Pending] Search for tool by ID"
-              + "\n4. [Pending] Check item quantity" + "\n5. [Pending] Decrease item quantity"
-              + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
+      System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
+          + "\n4. [Pending] Check item quantity" + "\n5. [Pending] Decrease item quantity"
+          + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
 
       // TODO Add a note to the TA in the Front-end describing how to use the program.
 
       showMenu = scanMenuInput(scan, showMenu, shop);
 
       if (showMenu) {
-        System.out.println("\n*** Press enter to return to the menu. ***");
+        System.out.println("*** Press enter to return to the menu. ***");
         scan.nextLine();
       } else {
         scan.close();
@@ -62,6 +61,9 @@ public class ToolStoreApp {
     case "2":
       searchToolByName(scan, shop);
       break;
+    case "3":
+      searchToolByID(scan, shop);
+      break;
     case "7":
       System.out.println("\n*** Application Terminated ***\n");
       showMenu = false;
@@ -80,7 +82,15 @@ public class ToolStoreApp {
     System.out.print("Please enter the tool name: ");
     String userInput = scan.nextLine();
 
-    System.out.println(shop.searchToolByName(userInput));
+    System.out.print(shop.searchToolByName(userInput));
+  }
+
+  private void searchToolByID(Scanner scan, Shop shop) {
+    clearConsole();
+    System.out.print("Please enter the tool ID: ");
+    String userInput = scan.nextLine();
+
+    System.out.print(shop.searchToolByID(userInput));
   }
 
   // ============================================================

@@ -72,7 +72,7 @@ public class Tool {
 
   @Override
   public String toString() {
-    String toolToString = getName()+ "\n";
+    String toolToString = "(Tool ID: " + getId() + ") " + getName() + "\n";
     return toolToString;
   }
 }

@@ -31,4 +31,8 @@ public class Shop {
   public String searchToolByName(String providedToolName) {
     return inventory.searchToolByName(providedToolName);
   }
+
+  public String searchToolByID(String providedToolID) {
+    return inventory.searchToolByID(providedToolID);
+  }
 }
