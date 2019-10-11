@@ -72,7 +72,7 @@ public class Tool {
 
   @Override
   public String toString() {
-    String toolToString = getName() + " ($" + String.format("%.2f", getPrice()) + ")\n";
+    String toolToString = getName()+ "\n";
     return toolToString;
   }
 }

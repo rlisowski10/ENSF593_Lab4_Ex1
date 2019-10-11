@@ -21,7 +21,7 @@ public class ToolStoreApp {
       clearConsole();
       System.out.println("Welcome to the RobCo Industries Supply Management System:");
       System.out.print(
-          "\n1. List all tools" + "\n2. [Pending] Search for tool by tool name" + "\n3. [Pending] Search for tool by ID"
+          "\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. [Pending] Search for tool by ID"
               + "\n4. [Pending] Check item quantity" + "\n5. [Pending] Decrease item quantity"
               + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
 
@@ -53,13 +53,14 @@ public class ToolStoreApp {
   }
 
   private boolean scanMenuInput(Scanner scan, boolean showMenu, Shop shop) {
-    String userInput;
-    userInput = scan.nextLine();
-    userInput = userInput.replaceAll("\\W", "");
+    String userInput = scan.nextLine();
 
     switch (userInput) {
     case "1":
       listAllTools(shop);
+      break;
+    case "2":
+      searchToolByName(scan, shop);
       break;
     case "7":
       System.out.println("\n*** Application Terminated ***\n");
@@ -71,7 +72,15 @@ public class ToolStoreApp {
 
   private void listAllTools(Shop shop) {
     clearConsole();
-    shop.displayToolList();
+    shop.displayInventory();
+  }
+
+  private void searchToolByName(Scanner scan, Shop shop) {
+    clearConsole();
+    System.out.print("Please enter the tool name: ");
+    String userInput = scan.nextLine();
+
+    System.out.println(shop.searchToolByName(userInput));
   }
 
   // ============================================================

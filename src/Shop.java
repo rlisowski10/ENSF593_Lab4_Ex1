@@ -17,10 +17,18 @@ public class Shop {
   }
 
   // ============================================================
+  // Accessors
+  // ============================================================
+
+  // ============================================================
   // Public Instance Methods
   // ============================================================
 
-  public void displayToolList() {
+  public void displayInventory() {
     System.out.println(inventory);
+  }
+
+  public String searchToolByName(String providedToolName) {
+    return inventory.searchToolByName(providedToolName);
   }
 }
