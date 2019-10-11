@@ -34,11 +34,24 @@ public class Inventory {
     return toolInfo;
   }
 
-  public String searchToolByID(String providedToolID, boolean expandedToolInfo) {
+  public String searchToolByID(String providedToolID, String inventoryProcess) {
     Tool toolResult = getToolByID(providedToolID);
 
     String toolInfo = "";
-    toolInfo = (expandedToolInfo == true) ? provideToolInfo(toolResult) : provideToolQuantities(toolResult);
+
+    switch (inventoryProcess) {
+    case "ShowAll":
+      toolInfo = provideToolInfo(toolResult);
+      break;
+    case "ShowQuantity":
+      toolInfo = provideToolQuantities(toolResult);
+      break;
+    case "DecreaseQuantity":
+      toolInfo = decreaseToolQuantity(toolResult);
+      break;
+    default:
+      System.out.println("\nError: Could not locate back-end inventory process.\n");
+    }
 
     return toolInfo;
   }
@@ -88,6 +101,24 @@ public class Inventory {
       toolInfo = "\n" + toolResult.getName() + "\nQuantity in stock: " + toolResult.getQuantity() + "\n\n";
     else
       toolInfo = "\nError: Tool not found.\n\n";
+
+    return toolInfo;
+  }
+
+  private String decreaseToolQuantity(Tool toolResult) {
+    String toolInfo;
+
+    if (toolResult == null)
+      toolInfo = "\nError: Tool not found.\n\n";
+    else if (toolResult.getQuantity() >= 25) {
+      int updatedQuantity = toolResult.getQuantity() - 25;
+      toolInfo = "\nSale! " + toolResult.getName() + " decreases from " + toolResult.getQuantity()
+          + " units to " + updatedQuantity + " units.\n\n";
+      toolResult.setQuantity(updatedQuantity);
+    } else {
+      toolInfo = "\nWe have sold out of " + toolResult.getName() + "! The quantity is now at 0.\n\n";
+      toolResult.setQuantity(0);
+    }
 
     return toolInfo;
   }

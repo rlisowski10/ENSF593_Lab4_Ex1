@@ -19,12 +19,11 @@ public class ToolStoreApp {
 
     while (showMenu) {
       clearConsole();
-      System.out.println("Welcome to the ROBCO Industries Supply Management System:");
+      System.out.println("Welcome to the ROBCO Industries Supply Management System");
+      System.out.println("\"We're in the business of happiness.\"");
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
-          + "\n4. Check item quantity by ID" + "\n5. Decrease item quantity"
-          + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
-
-      // TODO Add a note to the TA in the Front-end describing how to use the program.
+          + "\n4. Check item quantity by ID" + "\n5. [Testing] Simulate sale of item (-25 quantity)"
+          + "\n6. [Testing] Advance to next day" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
 
       showMenu = scanMenuInput(scan, showMenu, shop);
 
@@ -53,7 +52,7 @@ public class ToolStoreApp {
 
   private boolean scanMenuInput(Scanner scan, boolean showMenu, Shop shop) {
     String userInput = scan.nextLine();
-    boolean expandedToolInfo;
+    String inventoryProcess;
 
     switch (userInput) {
     case "1":
@@ -63,17 +62,23 @@ public class ToolStoreApp {
       searchToolByName(scan, shop);
       break;
     case "3":
-      expandedToolInfo = true;
-      searchToolByID(scan, shop, expandedToolInfo);
+      inventoryProcess = "ShowAll";
+      searchToolByID(scan, shop, inventoryProcess);
       break;
     case "4":
-      expandedToolInfo = false;
-      searchToolByID(scan, shop, expandedToolInfo);
+      inventoryProcess = "ShowQuantity";
+      searchToolByID(scan, shop, inventoryProcess);
+      break;
+    case "5":
+      inventoryProcess = "DecreaseQuantity";
+      searchToolByID(scan, shop, inventoryProcess);
       break;
     case "7":
       System.out.println("\n*** Shutting Down ***\n");
       showMenu = false;
       break;
+    default:
+      System.out.println("\nError: Please enter a valid menu number.\n");
     }
     return showMenu;
   }
@@ -91,12 +96,12 @@ public class ToolStoreApp {
     System.out.print(shop.searchToolByName(userInput));
   }
 
-  private void searchToolByID(Scanner scan, Shop shop, boolean expandedToolInfo) {
+  private void searchToolByID(Scanner scan, Shop shop, String inventoryProcess) {
     clearConsole();
     System.out.print("Please enter the tool ID: ");
     String userInput = scan.nextLine();
 
-    System.out.print(shop.searchToolByID(userInput, expandedToolInfo));
+    System.out.print(shop.searchToolByID(userInput, inventoryProcess));
   }
 
   // ============================================================
