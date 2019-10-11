@@ -32,7 +32,7 @@ public class Shop {
     return inventory.searchToolByName(providedToolName);
   }
 
-  public String searchToolByID(String providedToolID) {
-    return inventory.searchToolByID(providedToolID);
+  public String searchToolByID(String providedToolID, boolean expandedToolInfo) {
+    return inventory.searchToolByID(providedToolID, expandedToolInfo);
   }
 }

@@ -19,9 +19,9 @@ public class ToolStoreApp {
 
     while (showMenu) {
       clearConsole();
-      System.out.println("Welcome to the RobCo Industries Supply Management System:");
+      System.out.println("Welcome to the ROBCO Industries Supply Management System:");
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
-          + "\n4. Check item quantity by ID" + "\n5. [Pending] Decrease item quantity"
+          + "\n4. Check item quantity by ID" + "\n5. Decrease item quantity"
           + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
 
       // TODO Add a note to the TA in the Front-end describing how to use the program.
@@ -53,6 +53,7 @@ public class ToolStoreApp {
 
   private boolean scanMenuInput(Scanner scan, boolean showMenu, Shop shop) {
     String userInput = scan.nextLine();
+    boolean expandedToolInfo;
 
     switch (userInput) {
     case "1":
@@ -62,10 +63,15 @@ public class ToolStoreApp {
       searchToolByName(scan, shop);
       break;
     case "3":
-      searchToolByID(scan, shop);
+      expandedToolInfo = true;
+      searchToolByID(scan, shop, expandedToolInfo);
+      break;
+    case "4":
+      expandedToolInfo = false;
+      searchToolByID(scan, shop, expandedToolInfo);
       break;
     case "7":
-      System.out.println("\n*** Application Terminated ***\n");
+      System.out.println("\n*** Shutting Down ***\n");
       showMenu = false;
       break;
     }
@@ -85,12 +91,12 @@ public class ToolStoreApp {
     System.out.print(shop.searchToolByName(userInput));
   }
 
-  private void searchToolByID(Scanner scan, Shop shop) {
+  private void searchToolByID(Scanner scan, Shop shop, boolean expandedToolInfo) {
     clearConsole();
     System.out.print("Please enter the tool ID: ");
     String userInput = scan.nextLine();
 
-    System.out.print(shop.searchToolByID(userInput));
+    System.out.print(shop.searchToolByID(userInput, expandedToolInfo));
   }
 
   // ============================================================

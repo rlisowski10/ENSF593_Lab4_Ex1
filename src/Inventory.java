@@ -34,8 +34,29 @@ public class Inventory {
     return toolInfo;
   }
 
-  public String searchToolByID(String providedToolID) {
+  public String searchToolByID(String providedToolID, boolean expandedToolInfo) {
+    Tool toolResult = getToolByID(providedToolID);
+
     String toolInfo = "";
+    toolInfo = (expandedToolInfo == true) ? provideToolInfo(toolResult) : provideToolQuantities(toolResult);
+
+    return toolInfo;
+  }
+
+  @Override
+  public String toString() {
+    String inventoryToString = "List of tools in inventory: \n\n";
+    for (Tool tool : toolList)
+      inventoryToString += tool;
+
+    return inventoryToString;
+  }
+
+  // ============================================================
+  // Private Instance Methods
+  // ============================================================
+
+  private Tool getToolByID(String providedToolID) {
     Tool toolResult = null;
     boolean isNumeric = isNumeric(providedToolID);
 
@@ -46,9 +67,7 @@ public class Inventory {
           toolResult = tool;
       }
     }
-
-    toolInfo = provideToolInfo(toolResult);
-    return toolInfo;
+    return toolResult;
   }
 
   private String provideToolInfo(Tool toolResult) {
@@ -63,16 +82,17 @@ public class Inventory {
     return toolInfo;
   }
 
-  private static boolean isNumeric(String str) {
-    return str.matches("\\d+");
+  private String provideToolQuantities(Tool toolResult) {
+    String toolInfo;
+    if (toolResult != null)
+      toolInfo = "\n" + toolResult.getName() + "\nQuantity in stock: " + toolResult.getQuantity() + "\n\n";
+    else
+      toolInfo = "\nError: Tool not found.\n\n";
+
+    return toolInfo;
   }
 
-  @Override
-  public String toString() {
-    String inventoryToString = "List of tools in inventory: \n\n";
-    for (Tool tool : toolList)
-      inventoryToString += tool;
-
-    return inventoryToString;
+  private static boolean isNumeric(String str) {
+    return str.matches("\\d+");
   }
 }

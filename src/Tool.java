@@ -73,10 +73,7 @@ public class Tool {
   @Override
   public String toString() {
     String nameTabs;
-    if (getName().length() < 8)
-      nameTabs = "\t\t\t";
-    else
-      nameTabs = "\t\t";
+    nameTabs =  (getName().length() < 8) ? (nameTabs = "\t\t\t") : "\t\t";      
 
     String toolToString = getName() + nameTabs + "ID: " + getId() + "\tQuantity: " + getQuantity() + "\tPrice: $"
         + String.format("%.2f", getPrice()) + "\tSupplier: " + getSupplier().getName() + "\n";
