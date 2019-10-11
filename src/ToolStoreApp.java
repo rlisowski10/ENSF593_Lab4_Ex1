@@ -21,7 +21,7 @@ public class ToolStoreApp {
       clearConsole();
       System.out.println("Welcome to the RobCo Industries Supply Management System:");
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
-          + "\n4. [Pending] Check item quantity" + "\n5. [Pending] Decrease item quantity"
+          + "\n4. Check item quantity by ID" + "\n5. [Pending] Decrease item quantity"
           + "\n6. [Pending] Increase current date" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
 
       // TODO Add a note to the TA in the Front-end describing how to use the program.

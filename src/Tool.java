@@ -72,7 +72,14 @@ public class Tool {
 
   @Override
   public String toString() {
-    String toolToString = "(Tool ID: " + getId() + ") " + getName() + "\n";
+    String nameTabs;
+    if (getName().length() < 8)
+      nameTabs = "\t\t\t";
+    else
+      nameTabs = "\t\t";
+
+    String toolToString = getName() + nameTabs + "ID: " + getId() + "\tQuantity: " + getQuantity() + "\tPrice: $"
+        + String.format("%.2f", getPrice()) + "\tSupplier: " + getSupplier().getName() + "\n";
     return toolToString;
   }
 }
