@@ -37,4 +37,8 @@ public class Shop {
   public String searchToolByID(String providedToolID, String inventoryProcess) {
     return inventory.searchToolByID(providedToolID, inventoryProcess, orderRepository);
   }
+
+  public void advanceToNextDay() {
+    orderRepository.advanceToNextDay();
+  }
 }

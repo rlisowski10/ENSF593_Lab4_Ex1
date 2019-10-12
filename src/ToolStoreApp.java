@@ -76,7 +76,7 @@ public class ToolStoreApp {
       searchToolByID(scan, shop, inventoryProcess);
       break;
     case "6":
-      //advanceToNextDay(shop);
+      advanceToNextDay(shop);
       break;
     case "7":
       System.out.println("\n*** Shutting Down ***\n");
@@ -107,6 +107,10 @@ public class ToolStoreApp {
     String userInput = scan.nextLine();
 
     System.out.print(shop.searchToolByID(userInput, inventoryProcess));
+  }
+  
+  private void advanceToNextDay(Shop shop) {
+    shop.advanceToNextDay();
   }
 
   // ============================================================

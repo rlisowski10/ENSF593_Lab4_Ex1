@@ -19,7 +19,19 @@ public class OrderLine {
   // ============================================================
   // Accessors
   // ============================================================
-  
+
+  public int getOrderAmount() {
+    return orderAmount;
+  }
+
+  public String getToolName() {
+    return tool.getName();
+  }
+
+  public String getToolSupplier() {
+    return tool.getSupplierName();
+  }
+
   // ============================================================
   // Public Instance Methods
   // ============================================================

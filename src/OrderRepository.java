@@ -32,23 +32,55 @@ public class OrderRepository {
   public void updateOrder(ArrayList<Tool> toolList) {
     for (Tool tool : toolList) {
       if (tool.getQuantity() < MIN_QUANTITY) {
-        if (orderList.size() == 0) {
-          createNewDailyOrder(tool);
-        } else if (orderList.get(orderList.size() - 1).getOrderDate() != currentDate) {
-          createNewDailyOrder(tool);
-        } else {
-          // Add tool order to Order object for that day
-          addToExistingOrder(tool);
-        }
+        makeOrder(tool);
       }
     }
+  }
+
+  public void advanceToNextDay() {
+    boolean isOrderPrinted = false;
+    if (doesOrderExist()) {
+      Order currentOrder = orderList.get(orderList.size() - 1);
+      if (currentOrder.getOrderDate() == currentDate) {
+        isOrderPrinted = true;
+        currentOrder.printOrderLinesToConsole();
+        // TODO Print current order to text file.
+      }
+    }
+
+    if (!isOrderPrinted)
+      System.out.println("*** No order was created for the previous day. ***");
+
+    currentDate.plusDays(1);
   }
 
   // ============================================================
   // Private Instance Methods
   // ============================================================
 
-  private void addToExistingOrder(Tool tool) {
+  private boolean doesOrderExist() {
+    boolean doesAPreviousOrderExists = false;
+    if (orderList.size() == 0) {
+      doesAPreviousOrderExists = true;
+    }
+
+    return doesAPreviousOrderExists;
+  }
+
+  private void makeOrder(Tool tool) {
+    if (doesOrderExist()) {
+      Order currentOrder = orderList.get(orderList.size() - 1);
+      if (currentOrder.getOrderDate() != currentDate) {
+        createNewDailyOrder(tool);
+      } else {
+        addToCurrentOrder(tool);
+      }
+    } else {
+      createNewDailyOrder(tool);
+    }
+  }
+
+  private void addToCurrentOrder(Tool tool) {
     Order currentOrder = orderList.get(orderList.size() - 1);
     int orderSize = REQUIRED_QUANTITY - tool.getQuantity();
     currentOrder.addOrderLine(tool, orderSize);

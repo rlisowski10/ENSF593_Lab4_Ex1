@@ -26,6 +26,10 @@ public class Tool {
   // Accessors
   // ============================================================
 
+  public String getSupplierName() {
+    return supplier.getName();
+  }
+  
   public Supplier getSupplier() {
     return supplier;
   }
