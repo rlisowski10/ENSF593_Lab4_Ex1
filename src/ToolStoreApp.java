@@ -22,8 +22,7 @@ public class ToolStoreApp {
 
     while (showMenu) {
       clearConsole();
-      System.out.println("Welcome to the ROBCO Industries Supply Management System");
-      System.out.println("\"We're in the business of happiness.\"");
+      System.out.println("Welcome to the Internal Supply Management System");
       System.out.println(shop.getCurrentDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
           + "\n4. Check item quantity by ID" + "\n5. [Testing] Simulate sale of item (-25 quantity)"

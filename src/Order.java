@@ -41,24 +41,23 @@ public class Order {
   // Public Instance Methods
   // ============================================================
 
-  // TODO Add functionality to check for existing tool orderline
   public void addOrderLine(Tool toolToOrder, int orderQuantity) {
     OrderLine orderLine = new OrderLine(toolToOrder, orderQuantity);
     orderLineList.add(orderLine);
   }
 
-  public void printOrderLinesToConsole() {
-    printSeparator();
-    System.out.println("ORDER ID:\t\t" + orderID + "\nDate Ordered:\t\t"
-        + orderDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
+  public String printOrderLines() {
+    String orderText = "";
+
+    orderText += "\nORDER ID:\t\t" + orderID + "\nDate Ordered:\t\t"
+        + orderDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 
     for (OrderLine orderLine : orderLineList) {
-      System.out.println("\nItem description:\t" + orderLine.getToolName() + "\nAmount ordered:\t\t"
-          + orderLine.getOrderAmount() + "\nSupplier:\t\t" + orderLine.getToolSupplier());
+      orderText += "\n\nItem description:\t" + orderLine.getToolName() + "\nAmount ordered:\t\t"
+      + orderLine.getOrderAmount() + "\nSupplier:\t\t" + orderLine.getToolSupplier();
     }
 
-    printSeparator();
-    System.out.println("\nNote: Above order exported to Order.txt.\n");
+    return orderText;
   }
 
   public void updateToolQuantities() {
@@ -90,9 +89,5 @@ public class Order {
     int randomID = (int) (MAX_RANDOM_ID * r.nextDouble());
 
     return randomID;
-  }
-
-  private void printSeparator() {
-    System.out.println("*".repeat(70));
   }
 }

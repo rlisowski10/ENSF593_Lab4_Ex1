@@ -105,7 +105,6 @@ public class Inventory {
     return toolInfo;
   }
 
-  // TODO Potentially place this in Tool, like Dr. M shows
   private String decreaseToolQuantity(Tool toolResult, OrderRepository orderRepository) {
     String toolInfo;
 

@@ -6,21 +6,21 @@ public class SupplierList {
   // Member Variables
   // ============================================================
 
-  private ArrayList<Supplier> supplierList;
+  private ArrayList<Supplier> suppliers;
 
   // ============================================================
   // Constructors
   // ============================================================
 
-  public SupplierList(ArrayList<Supplier> supplierList) {
-    this.setSupplierList(supplierList);
+  public SupplierList(ArrayList<Supplier> suppliers) {
+    this.setSupplierList(suppliers);
   }
 
   // ============================================================
   // Accessors
   // ============================================================
 
-  public void setSupplierList(ArrayList<Supplier> supplierList) {
-    this.supplierList = supplierList;
+  public void setSupplierList(ArrayList<Supplier> suppliers) {
+    this.suppliers = suppliers;
   }
 }

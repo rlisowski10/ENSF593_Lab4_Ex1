@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 
 public class OrderRepository {
@@ -45,14 +46,30 @@ public class OrderRepository {
     if (isOrderPopulated()) {
       Order currentOrder = orderList.get(orderList.size() - 1);
       if (currentOrder.getOrderDate() == currentDate) {
-        currentOrder.printOrderLinesToConsole();
-        // TODO Print current order to text file.
+        currentOrder.printOrderLines();
         currentOrder.updateToolQuantities();
+        printOrders();
+        System.out.println("\nNote: Above order exported to Order.txt.\n");
       } else
-        System.out.println("*** No order was created for the previous day. ***\n");
+        System.out.println("*** No order was created for the day. ***\n");
     }
 
     this.currentDate = currentDate.plusDays(1);
+  }
+
+  private void printOrders() {
+    String ordersText = printSeparator();
+    for (Order order : orderList)
+      ordersText += order.printOrderLines() + "\n" + printSeparator();
+    System.out.println(ordersText);
+
+    try {
+      PrintWriter writer = new PrintWriter("order.txt", "UTF-8");
+      writer.println(ordersText);
+      writer.close();
+    } catch (Exception e) {
+      System.out.println("Error: Could not write order to text file.");
+    }
   }
 
   // ============================================================
@@ -92,5 +109,9 @@ public class OrderRepository {
     orderList.add(newDailyOrder);
     int orderSize = REQUIRED_QUANTITY - tool.getQuantity();
     newDailyOrder.addOrderLine(tool, orderSize);
+  }
+
+  private String printSeparator() {
+    return ("*".repeat(70));
   }
 }
