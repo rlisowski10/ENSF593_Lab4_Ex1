@@ -25,6 +25,10 @@ public class OrderRepository {
   // Accessors
   // ============================================================
 
+  public LocalDate getCurrentDate() {
+    return currentDate;
+  }
+
   // ============================================================
   // Public Instance Methods
   // ============================================================
@@ -38,51 +42,48 @@ public class OrderRepository {
   }
 
   public void advanceToNextDay() {
-    boolean isOrderPrinted = false;
-    if (doesOrderExist()) {
+    if (isOrderPopulated()) {
       Order currentOrder = orderList.get(orderList.size() - 1);
       if (currentOrder.getOrderDate() == currentDate) {
-        isOrderPrinted = true;
         currentOrder.printOrderLinesToConsole();
         // TODO Print current order to text file.
-      }
+        currentOrder.updateToolQuantities();
+      } else
+        System.out.println("*** No order was created for the previous day. ***\n");
     }
 
-    if (!isOrderPrinted)
-      System.out.println("*** No order was created for the previous day. ***");
-
-    currentDate.plusDays(1);
+    this.currentDate = currentDate.plusDays(1);
   }
 
   // ============================================================
   // Private Instance Methods
   // ============================================================
 
-  private boolean doesOrderExist() {
-    boolean doesAPreviousOrderExists = false;
+  private boolean isOrderPopulated() {
+    boolean isOrderPopulated = true;
     if (orderList.size() == 0) {
-      doesAPreviousOrderExists = true;
+      isOrderPopulated = false;
     }
 
-    return doesAPreviousOrderExists;
+    return isOrderPopulated;
   }
 
   private void makeOrder(Tool tool) {
-    if (doesOrderExist()) {
+    if (isOrderPopulated()) {
       Order currentOrder = orderList.get(orderList.size() - 1);
       if (currentOrder.getOrderDate() != currentDate) {
         createNewDailyOrder(tool);
       } else {
-        addToCurrentOrder(tool);
+        addToCurrentOrder(tool, currentOrder);
       }
     } else {
       createNewDailyOrder(tool);
     }
   }
 
-  private void addToCurrentOrder(Tool tool) {
-    Order currentOrder = orderList.get(orderList.size() - 1);
+  private void addToCurrentOrder(Tool tool, Order currentOrder) {
     int orderSize = REQUIRED_QUANTITY - tool.getQuantity();
+    currentOrder.removeOrderLineForSameTool(tool);
     currentOrder.addOrderLine(tool, orderSize);
   }
 

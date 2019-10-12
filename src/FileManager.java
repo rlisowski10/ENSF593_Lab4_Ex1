@@ -12,8 +12,9 @@ public class FileManager {
   public Shop loadShop() {
     ArrayList<Supplier> suppliers = loadSupplierList();
     SupplierList supplierList = new SupplierList(suppliers);
-    Inventory inventory = loadInventory(suppliers);
     OrderRepository orderRepository = new OrderRepository();
+    Inventory inventory = loadInventory(suppliers, orderRepository);
+    
 
     Shop shop = new Shop(supplierList, inventory, orderRepository);
     return shop;
@@ -43,7 +44,7 @@ public class FileManager {
     return suppliers;
   }
 
-  private Inventory loadInventory(ArrayList<Supplier> suppliers) {
+  private Inventory loadInventory(ArrayList<Supplier> suppliers, OrderRepository orderRepository) {
     ArrayList<Tool> toolList = new ArrayList<Tool>();
 
     String inventoryFilePath = "./resources/items.txt";
@@ -62,6 +63,7 @@ public class FileManager {
       toolList.add(tool);
     }
 
+    orderRepository.updateOrder(toolList);
     Inventory inventory = new Inventory(toolList);
     return inventory;
   }

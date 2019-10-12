@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Random;
 
 public class Order {
@@ -47,14 +49,36 @@ public class Order {
 
   public void printOrderLinesToConsole() {
     printSeparator();
-    System.out.println("\nORDER ID:\t\t\t" + orderID + "\nDate Ordered:\t\t\t" + orderDate + "\n");
+    System.out.println("ORDER ID:\t\t" + orderID + "\nDate Ordered:\t\t"
+        + orderDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
 
     for (OrderLine orderLine : orderLineList) {
-      System.out.println("\nItem description:\t\t" + orderLine.getToolName() + "\nAmount ordered:\t\t"
+      System.out.println("\nItem description:\t" + orderLine.getToolName() + "\nAmount ordered:\t\t"
           + orderLine.getOrderAmount() + "\nSupplier:\t\t" + orderLine.getToolSupplier());
     }
 
     printSeparator();
+    System.out.println("\nNote: Above order exported to Order.txt.\n");
+  }
+
+  public void updateToolQuantities() {
+    for (OrderLine orderLine : orderLineList)
+      orderLine.updateToolQuantity();
+  }
+
+  public void removeOrderLineForSameTool(Tool tool) {
+    int elementToRemove = 0;
+    boolean removeElement = false;
+
+    for (int i = 0; i < orderLineList.size(); i++) {
+      if (tool.getName().equals(orderLineList.get(i).getToolName())) {
+        elementToRemove = i;
+        removeElement = true;
+      }
+    }
+
+    if (removeElement)
+      orderLineList.remove(elementToRemove);
   }
 
   // ============================================================

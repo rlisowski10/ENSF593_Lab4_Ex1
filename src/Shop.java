@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Shop {
 
   // ============================================================
@@ -40,5 +42,9 @@ public class Shop {
 
   public void advanceToNextDay() {
     orderRepository.advanceToNextDay();
+  }
+
+  public LocalDate getCurrentDate() {
+    return orderRepository.getCurrentDate();
   }
 }

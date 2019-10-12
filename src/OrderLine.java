@@ -36,6 +36,11 @@ public class OrderLine {
   // Public Instance Methods
   // ============================================================
 
+  public void updateToolQuantity() {
+    int currentQuantity = tool.getQuantity();
+    tool.setQuantity(currentQuantity + orderAmount);
+  }
+
   // ============================================================
   // Private Instance Methods
   // ============================================================

@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 // TODO JavaDocs
@@ -22,9 +24,10 @@ public class ToolStoreApp {
       clearConsole();
       System.out.println("Welcome to the ROBCO Industries Supply Management System");
       System.out.println("\"We're in the business of happiness.\"");
+      System.out.println(shop.getCurrentDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)));
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
           + "\n4. Check item quantity by ID" + "\n5. [Testing] Simulate sale of item (-25 quantity)"
-          + "\n6. [Testing] Advance to next day / Create order" + "\n7. Quit"
+          + "\n6. [Testing] Advance to next day (create order)" + "\n7. Quit"
           + "\n\nPlease enter a number from the list: ");
 
       showMenu = scanMenuInput(scan, showMenu, shop);
@@ -108,8 +111,9 @@ public class ToolStoreApp {
 
     System.out.print(shop.searchToolByID(userInput, inventoryProcess));
   }
-  
+
   private void advanceToNextDay(Shop shop) {
+    clearConsole();
     shop.advanceToNextDay();
   }
 
