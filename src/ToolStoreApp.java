@@ -3,6 +3,7 @@ import java.util.Scanner;
 // TODO JavaDocs
 // TODO Ensure all member variables calls are through getter/setter
 // TODO Consider security throughout
+// TODO Check for SRP throughout, and move methods if needed
 
 public class ToolStoreApp {
 
@@ -23,7 +24,8 @@ public class ToolStoreApp {
       System.out.println("\"We're in the business of happiness.\"");
       System.out.print("\n1. List all tools" + "\n2. Search for tool by tool name" + "\n3. Search for tool by ID"
           + "\n4. Check item quantity by ID" + "\n5. [Testing] Simulate sale of item (-25 quantity)"
-          + "\n6. [Testing] Advance to next day" + "\n7. Quit" + "\n\nPlease enter a number from the list: ");
+          + "\n6. [Testing] Advance to next day / Create order" + "\n7. Quit"
+          + "\n\nPlease enter a number from the list: ");
 
       showMenu = scanMenuInput(scan, showMenu, shop);
 
@@ -72,6 +74,9 @@ public class ToolStoreApp {
     case "5":
       inventoryProcess = "DecreaseQuantity";
       searchToolByID(scan, shop, inventoryProcess);
+      break;
+    case "6":
+      //advanceToNextDay(shop);
       break;
     case "7":
       System.out.println("\n*** Shutting Down ***\n");

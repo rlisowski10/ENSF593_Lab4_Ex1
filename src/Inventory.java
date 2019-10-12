@@ -6,7 +6,7 @@ public class Inventory {
   // Member Variables
   // ============================================================
 
-  private ArrayList<Tool> toolList = new ArrayList<Tool>();
+  private ArrayList<Tool> toolList;
 
   // ============================================================
   // Constructors
@@ -34,7 +34,7 @@ public class Inventory {
     return toolInfo;
   }
 
-  public String searchToolByID(String providedToolID, String inventoryProcess) {
+  public String searchToolByID(String providedToolID, String inventoryProcess, OrderRepository orderRepository) {
     Tool toolResult = getToolByID(providedToolID);
 
     String toolInfo = "";
@@ -44,10 +44,10 @@ public class Inventory {
       toolInfo = provideToolInfo(toolResult);
       break;
     case "ShowQuantity":
-      toolInfo = provideToolQuantities(toolResult);
+      toolInfo = provideToolQuantity(toolResult);
       break;
     case "DecreaseQuantity":
-      toolInfo = decreaseToolQuantity(toolResult);
+      toolInfo = decreaseToolQuantity(toolResult, orderRepository);
       break;
     default:
       System.out.println("\nError: Could not locate back-end inventory process.\n");
@@ -95,7 +95,7 @@ public class Inventory {
     return toolInfo;
   }
 
-  private String provideToolQuantities(Tool toolResult) {
+  private String provideToolQuantity(Tool toolResult) {
     String toolInfo;
     if (toolResult != null)
       toolInfo = "\n" + toolResult.getName() + "\nQuantity in stock: " + toolResult.getQuantity() + "\n\n";
@@ -105,7 +105,8 @@ public class Inventory {
     return toolInfo;
   }
 
-  private String decreaseToolQuantity(Tool toolResult) {
+  // TODO Potentially place this in Tool, like Dr. M shows
+  private String decreaseToolQuantity(Tool toolResult, OrderRepository orderRepository) {
     String toolInfo;
 
     if (toolResult == null)
@@ -119,6 +120,9 @@ public class Inventory {
       toolInfo = "\nWe have sold out of " + toolResult.getName() + "! The quantity is now at 0.\n\n";
       toolResult.setQuantity(0);
     }
+
+    if (toolResult.getQuantity() < 40)
+      orderRepository.updateOrder(toolList);
 
     return toolInfo;
   }

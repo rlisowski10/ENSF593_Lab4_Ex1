@@ -6,7 +6,7 @@ public class SupplierList {
   // Member Variables
   // ============================================================
 
-  private ArrayList<Supplier> supplierList = new ArrayList<Supplier>();
+  private ArrayList<Supplier> supplierList;
 
   // ============================================================
   // Constructors

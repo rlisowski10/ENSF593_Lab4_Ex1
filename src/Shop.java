@@ -6,14 +6,16 @@ public class Shop {
 
   private SupplierList supplierList;
   private Inventory inventory;
+  private OrderRepository orderRepository;
 
   // ============================================================
   // Constructors
   // ============================================================
 
-  public Shop(SupplierList supplierList, Inventory inventory) {
+  public Shop(SupplierList supplierList, Inventory inventory, OrderRepository orderRepository) {
     this.supplierList = supplierList;
     this.inventory = inventory;
+    this.orderRepository = orderRepository;
   }
 
   // ============================================================
@@ -33,6 +35,6 @@ public class Shop {
   }
 
   public String searchToolByID(String providedToolID, String inventoryProcess) {
-    return inventory.searchToolByID(providedToolID, inventoryProcess);
+    return inventory.searchToolByID(providedToolID, inventoryProcess, orderRepository);
   }
 }

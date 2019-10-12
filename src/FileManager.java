@@ -13,8 +13,9 @@ public class FileManager {
     ArrayList<Supplier> suppliers = loadSupplierList();
     SupplierList supplierList = new SupplierList(suppliers);
     Inventory inventory = loadInventory(suppliers);
+    OrderRepository orderRepository = new OrderRepository();
 
-    Shop shop = new Shop(supplierList, inventory);
+    Shop shop = new Shop(supplierList, inventory, orderRepository);
     return shop;
   }
 
