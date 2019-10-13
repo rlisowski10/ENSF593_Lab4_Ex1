@@ -17,7 +17,7 @@ public class Inventory {
   // ============================================================
 
   private ArrayList<Tool> toolList;
-  private final int SALE_QUANTITY = 25;
+  private static final int SALE_QUANTITY = 25;
 
   // ============================================================
   // Constructors

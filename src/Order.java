@@ -23,12 +23,16 @@ public class Order {
   private ArrayList<OrderLine> orderLineList;
   private LocalDate orderDate;
   private int orderID;
-  private final int MAX_RANDOM_ID = 99999;
+  private static final int MAX_RANDOM_ID = 99999;
 
   // ============================================================
   // Constructors
   // ============================================================
 
+  /**
+   * @param currentDate
+   * @return
+   */
   public Order(LocalDate currentDate) {
     setOrderDate(currentDate);
     orderLineList = new ArrayList<OrderLine>();
@@ -39,22 +43,38 @@ public class Order {
   // Accessors
   // ============================================================
 
+  /**
+   * @return LocalDate
+   */
   public LocalDate getOrderDate() {
     return orderDate;
   }
 
+  /**
+   * @param orderDate
+   */
   public void setOrderDate(LocalDate orderDate) {
     this.orderDate = orderDate;
   }
 
+  /**
+   * @return int
+   */
   public int getOrderID() {
     return orderID;
   }
 
+  /**
+   * @param orderID
+   */
   public void setOrderID(int orderID) {
     this.orderID = orderID;
   }
 
+  /**
+   * @param toolToOrder
+   * @param orderQuantity
+   */
   // ============================================================
   // Public Instance Methods
   // ============================================================
@@ -64,6 +84,9 @@ public class Order {
     orderLineList.add(orderLine);
   }
 
+  /**
+   * @return String
+   */
   public String printOrderLines() {
     String orderText = "";
 
@@ -83,6 +106,9 @@ public class Order {
       orderLine.updateToolQuantity();
   }
 
+  /**
+   * @param tool
+   */
   public void removeOrderLineForSameTool(Tool tool) {
     int elementToRemove = 0;
     boolean removeElement = false;
@@ -98,6 +124,9 @@ public class Order {
       orderLineList.remove(elementToRemove);
   }
 
+  /**
+   * @return int
+   */
   // ============================================================
   // Private Instance Methods
   // ============================================================
