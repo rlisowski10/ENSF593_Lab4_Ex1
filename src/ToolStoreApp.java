@@ -2,7 +2,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Scanner;
 
-// TODO JavaDocs
+// TODO JavaDocs for member variables.
 
 /**
  * Displays the user interface to the console, and allows for user interaction

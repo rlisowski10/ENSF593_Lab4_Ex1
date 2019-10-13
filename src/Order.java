@@ -30,8 +30,11 @@ public class Order {
   // ============================================================
 
   /**
-   * @param currentDate
-   * @return
+   * Constructor that sets the order date to the current (simulation) date for the
+   * program, generates a random order ID, and creates a new list of orderlines
+   * for the order.
+   * 
+   * @param currentDate The current (simulation) date for the application.
    */
   public Order(LocalDate currentDate) {
     setOrderDate(currentDate);
@@ -44,48 +47,60 @@ public class Order {
   // ============================================================
 
   /**
-   * @return LocalDate
+   * Gets the order date for the order.
+   * 
+   * @return LocalDate The order date for the order.
    */
   public LocalDate getOrderDate() {
     return orderDate;
   }
 
   /**
-   * @param orderDate
+   * Sets the order date for the order.
+   * 
+   * @param orderDate The order date for the order.
    */
   public void setOrderDate(LocalDate orderDate) {
     this.orderDate = orderDate;
   }
 
   /**
-   * @return int
+   * Gets the 5-digit randomly-generated ID for the order.
+   * 
+   * @return int The 5-digit randomly-generated ID for the order.
    */
   public int getOrderID() {
     return orderID;
   }
 
   /**
-   * @param orderID
+   * Sets the order ID for the order.
+   * 
+   * @param orderID The order ID for the order.
    */
   public void setOrderID(int orderID) {
     this.orderID = orderID;
   }
 
-  /**
-   * @param toolToOrder
-   * @param orderQuantity
-   */
   // ============================================================
   // Public Instance Methods
   // ============================================================
 
+  /**
+   * Adds a tool orderline to the current order.
+   * 
+   * @param toolToOrder   The tool that is to be ordered.
+   * @param orderQuantity The quantity of the tool to be ordered.
+   */
   public void addOrderLine(Tool toolToOrder, int orderQuantity) {
     OrderLine orderLine = new OrderLine(toolToOrder, orderQuantity);
     orderLineList.add(orderLine);
   }
 
   /**
-   * @return String
+   * Prints the data for the tool orderline to a string variable.
+   * 
+   * @return String Holds the text for the orderline.
    */
   public String printOrderLines() {
     String orderText = "";
@@ -101,18 +116,28 @@ public class Order {
     return orderText;
   }
 
+  /**
+   * Iterates through each orderline, updating the associated tool with the new
+   * tool quantity.
+   */
   public void updateToolQuantities() {
     for (OrderLine orderLine : orderLineList)
       orderLine.updateToolQuantity();
   }
 
   /**
-   * @param tool
+   * Checks the list that contains the daily orderlines to see if an orderline
+   * already exists for that tool. If so, the old orderline is replaced by a a new
+   * orderline for the tool.
+   * 
+   * @param tool The tool that an orderline will be created for.
    */
   public void removeOrderLineForSameTool(Tool tool) {
     int elementToRemove = 0;
     boolean removeElement = false;
 
+    // Iterates through the orderline list to check for an existing orderline for
+    // the tool.
     for (int i = 0; i < orderLineList.size(); i++) {
       if (tool.getName().equals(orderLineList.get(i).getToolName())) {
         elementToRemove = i;
@@ -120,17 +145,21 @@ public class Order {
       }
     }
 
+    // If an existing orderline is found for the tool, the existing orderline for
+    // that tool is replaced by a new tool orderline.
     if (removeElement)
       orderLineList.remove(elementToRemove);
   }
 
-  /**
-   * @return int
-   */
   // ============================================================
   // Private Instance Methods
   // ============================================================
 
+  /**
+   * Randomly generates a 5-digit order ID.
+   * 
+   * @return int A 5-digit randomly assigned order ID.
+   */
   private int generateOrderID() {
     Random r = new Random();
     int randomID = (int) (MAX_RANDOM_ID * r.nextDouble());

@@ -20,6 +20,11 @@ public class SupplierList {
   // Constructors
   // ============================================================
 
+  /**
+   * Constructor for the list of suppliers.
+   * 
+   * @param suppliers An arraylist of suppliers.
+   */
   public SupplierList(ArrayList<Supplier> suppliers) {
     this.suppliers = suppliers;
   }
