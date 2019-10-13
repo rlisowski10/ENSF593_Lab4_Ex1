@@ -1,5 +1,13 @@
 import java.util.ArrayList;
 
+/**
+ * Stores the supplier list information for the store.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class SupplierList {
 
   // ============================================================
@@ -13,14 +21,6 @@ public class SupplierList {
   // ============================================================
 
   public SupplierList(ArrayList<Supplier> suppliers) {
-    this.setSupplierList(suppliers);
-  }
-
-  // ============================================================
-  // Accessors
-  // ============================================================
-
-  public void setSupplierList(ArrayList<Supplier> suppliers) {
     this.suppliers = suppliers;
   }
 }

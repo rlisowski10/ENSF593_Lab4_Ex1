@@ -1,3 +1,12 @@
+/**
+ * Stores the individual tool order data, and handles tool quantity updates
+ * after additional stock has been ordered.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class OrderLine {
 
   // ============================================================
@@ -12,8 +21,8 @@ public class OrderLine {
   // ============================================================
 
   public OrderLine(Tool tool, int orderAmount) {
-    this.tool = tool;
-    this.orderAmount = orderAmount;
+    setTool(tool);
+    setOrderAmount(orderAmount);
   }
 
   // ============================================================
@@ -24,12 +33,16 @@ public class OrderLine {
     return orderAmount;
   }
 
-  public String getToolName() {
-    return tool.getName();
+  public void setOrderAmount(int orderAmount) {
+    this.orderAmount = orderAmount;
   }
 
-  public String getToolSupplier() {
-    return tool.getSupplierName();
+  public Tool getTool() {
+    return tool;
+  }
+
+  public void setTool(Tool tool) {
+    this.tool = tool;
   }
 
   // ============================================================
@@ -37,11 +50,15 @@ public class OrderLine {
   // ============================================================
 
   public void updateToolQuantity() {
-    int currentQuantity = tool.getQuantity();
-    tool.setQuantity(currentQuantity + orderAmount);
+    int currentQuantity = getTool().getQuantity();
+    getTool().setQuantity(currentQuantity + getOrderAmount());
   }
 
-  // ============================================================
-  // Private Instance Methods
-  // ============================================================
+  public String getToolName() {
+    return getTool().getName();
+  }
+
+  public String getToolSupplier() {
+    return getTool().getSupplierName();
+  }
 }

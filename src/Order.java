@@ -4,6 +4,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Random;
 
+/**
+ * Holds the data for each daily order, including an arraylist of orderlines for
+ * each tool that has been ordered. Allows new tools to be ordered, and displays
+ * the relevant individual tool order information to the user.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class Order {
 
   // ============================================================
@@ -20,9 +30,9 @@ public class Order {
   // ============================================================
 
   public Order(LocalDate currentDate) {
-    orderDate = currentDate;
+    setOrderDate(currentDate);
     orderLineList = new ArrayList<OrderLine>();
-    orderID = generateOrderID();
+    setOrderID(generateOrderID());
   }
 
   // ============================================================
@@ -37,6 +47,14 @@ public class Order {
     this.orderDate = orderDate;
   }
 
+  public int getOrderID() {
+    return orderID;
+  }
+
+  public void setOrderID(int orderID) {
+    this.orderID = orderID;
+  }
+
   // ============================================================
   // Public Instance Methods
   // ============================================================
@@ -49,12 +67,12 @@ public class Order {
   public String printOrderLines() {
     String orderText = "";
 
-    orderText += "\nORDER ID:\t\t" + orderID + "\nDate Ordered:\t\t"
-        + orderDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+    orderText += "\nORDER ID:\t\t" + getOrderID() + "\nDate Ordered:\t\t"
+        + getOrderDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 
     for (OrderLine orderLine : orderLineList) {
       orderText += "\n\nItem description:\t" + orderLine.getToolName() + "\nAmount ordered:\t\t"
-      + orderLine.getOrderAmount() + "\nSupplier:\t\t" + orderLine.getToolSupplier();
+          + orderLine.getOrderAmount() + "\nSupplier:\t\t" + orderLine.getToolSupplier();
     }
 
     return orderText;

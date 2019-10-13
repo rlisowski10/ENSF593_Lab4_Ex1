@@ -2,6 +2,16 @@ import java.util.ArrayList;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
+/**
+ * Holds a list of all of the daily orders that have been made through time.
+ * Provides functionality for printing general order data, along with creating
+ * new orders for each day.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class OrderRepository {
 
   // ============================================================
@@ -18,8 +28,8 @@ public class OrderRepository {
   // ============================================================
 
   public OrderRepository() {
-    currentDate = LocalDate.now();
-    orderList = new ArrayList<Order>();
+    setCurrentDate(LocalDate.now());
+    setOrderList(new ArrayList<Order>());
   }
 
   // ============================================================
@@ -28,6 +38,18 @@ public class OrderRepository {
 
   public LocalDate getCurrentDate() {
     return currentDate;
+  }
+
+  public void setCurrentDate(LocalDate currentDate) {
+    this.currentDate = currentDate;
+  }
+
+  public void setOrderList(ArrayList<Order> orderList) {
+    this.orderList = orderList;
+  }
+
+  public int getMIN_QUANTITY() {
+    return MIN_QUANTITY;
   }
 
   // ============================================================
@@ -45,7 +67,7 @@ public class OrderRepository {
   public void advanceToNextDay() {
     if (isOrderPopulated()) {
       Order currentOrder = orderList.get(orderList.size() - 1);
-      if (currentOrder.getOrderDate() == currentDate) {
+      if (currentOrder.getOrderDate() == getCurrentDate()) {
         currentOrder.printOrderLines();
         currentOrder.updateToolQuantities();
         printOrders();
@@ -53,8 +75,7 @@ public class OrderRepository {
       } else
         System.out.println("*** No order was created for the day. ***\n");
     }
-
-    this.currentDate = currentDate.plusDays(1);
+    setCurrentDate(getCurrentDate().plusDays(1));
   }
 
   private void printOrders() {
@@ -88,7 +109,7 @@ public class OrderRepository {
   private void makeOrder(Tool tool) {
     if (isOrderPopulated()) {
       Order currentOrder = orderList.get(orderList.size() - 1);
-      if (currentOrder.getOrderDate() != currentDate) {
+      if (currentOrder.getOrderDate() != getCurrentDate()) {
         createNewDailyOrder(tool);
       } else {
         addToCurrentOrder(tool, currentOrder);
@@ -105,7 +126,7 @@ public class OrderRepository {
   }
 
   private void createNewDailyOrder(Tool tool) {
-    Order newDailyOrder = new Order(currentDate);
+    Order newDailyOrder = new Order(getCurrentDate());
     orderList.add(newDailyOrder);
     int orderSize = REQUIRED_QUANTITY - tool.getQuantity();
     newDailyOrder.addOrderLine(tool, orderSize);

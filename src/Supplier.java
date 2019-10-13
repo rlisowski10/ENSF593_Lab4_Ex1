@@ -1,3 +1,11 @@
+/**
+ * Stores the data for each individual supplier.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class Supplier {
 
   // ============================================================
@@ -24,16 +32,8 @@ public class Supplier {
   // Accessors
   // ============================================================
 
-  public String getContact() {
-    return contact;
-  }
-
   public void setContact(String contact) {
     this.contact = contact;
-  }
-
-  public String getAddress() {
-    return address;
   }
 
   public void setAddress(String address) {

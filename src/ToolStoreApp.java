@@ -3,16 +3,25 @@ import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 // TODO JavaDocs
-// TODO Ensure all member variables calls are through getter/setter
-// TODO Consider security throughout
-// TODO Check for SRP throughout, and move methods if needed
 
+/**
+ * Displays the user interface to the console, and allows for user interaction
+ * with the application.
+ * <p>
+ *
+ * @author Ryan Lisowski (ID: 00257796)
+ * @version 1.0
+ * @since 2019-10-12
+ */
 public class ToolStoreApp {
 
   // ============================================================
   // Public Instance Methods
   // ============================================================
 
+  /**
+   * Displays the front-end menu to the user, and handles returning to the menu.
+   */
   public void displayMenu() {
     Scanner scan = new Scanner(System.in);
     boolean showMenu = true;
@@ -29,7 +38,7 @@ public class ToolStoreApp {
           + "\n6. [Testing] Advance to next day (create order)" + "\n7. Quit"
           + "\n\nPlease enter a number from the list: ");
 
-      showMenu = scanMenuInput(scan, showMenu, shop);
+      showMenu = scanMenuInput(scan, shop);
 
       if (showMenu) {
         System.out.println("*** Press enter to return to the menu. ***");
@@ -45,6 +54,9 @@ public class ToolStoreApp {
   // Private Instance Methods
   // ============================================================
 
+  /**
+   * Clears the console for the next display of the user-interface.
+   */
   private void clearConsole() {
     int numRowsToAdd = 200;
 
@@ -54,7 +66,18 @@ public class ToolStoreApp {
       System.out.println("");
   }
 
-  private boolean scanMenuInput(Scanner scan, boolean showMenu, Shop shop) {
+  /**
+   * Scans for the user-input in the menu, and directs the input to the proper
+   * functionality.
+   * 
+   * @param scan A scanner for user-input.
+   * @param shop The Shop object, which is the main object-containiner for the
+   *             back-end.
+   * @return boolean A boolean to direct whether to show the user-interface to the
+   *         user or not.
+   */
+  private boolean scanMenuInput(Scanner scan, Shop shop) {
+    boolean showMenu = true;
     String userInput = scan.nextLine();
     String inventoryProcess;
 
@@ -90,11 +113,24 @@ public class ToolStoreApp {
     return showMenu;
   }
 
+  /**
+   * Calls a method to display all tools in inventory to the user.
+   * 
+   * @param shop The Shop object, which is the main object-containiner for the
+   *             back-end.
+   */
   private void listAllTools(Shop shop) {
     clearConsole();
-    shop.displayInventory();
+    System.out.println(shop.getInventory());
   }
 
+  /**
+   * Allows the user to search for any tool by name (case-agnostic).
+   * 
+   * @param scan A scanner for user-input.
+   * @param shop The Shop object, which is the main object-containiner for the
+   *             back-end.
+   */
   private void searchToolByName(Scanner scan, Shop shop) {
     clearConsole();
     System.out.print("Please enter the tool name: ");
@@ -103,6 +139,16 @@ public class ToolStoreApp {
     System.out.print(shop.searchToolByName(userInput));
   }
 
+  /**
+   * Allows the user to search for any tool by ID number.
+   * 
+   * @param scan             A scanner for user-input.
+   * @param shop             The Shop object, which is the main object-containiner
+   *                         for the back-end.
+   * @param inventoryProcess A string that dictates the back-end functionality in
+   *                         the Inventory class. Providing this string allows for
+   *                         substantial code reuse.
+   */
   private void searchToolByID(Scanner scan, Shop shop, String inventoryProcess) {
     clearConsole();
     System.out.print("Please enter the tool ID: ");
@@ -111,6 +157,13 @@ public class ToolStoreApp {
     System.out.print(shop.searchToolByID(userInput, inventoryProcess));
   }
 
+  /**
+   * Calls a method to advance the application to the next day, for simulation and
+   * testing purposes.
+   * 
+   * @param shop The Shop object, which is the main object-containiner for the
+   *             back-end.
+   */
   private void advanceToNextDay(Shop shop) {
     clearConsole();
     shop.advanceToNextDay();
@@ -120,6 +173,11 @@ public class ToolStoreApp {
   // Static Methods
   // ============================================================
 
+  /**
+   * The main method, from which the program initially starts.
+   * 
+   * @param args Console arguments; unused in this case.
+   */
   public static void main(String[] args) {
     ToolStoreApp toolStoreApp = new ToolStoreApp();
     toolStoreApp.displayMenu();
