@@ -113,7 +113,7 @@ public class OrderRepository {
       if (currentOrder.getOrderDate() == getCurrentDate()) {
         currentOrder.updateToolQuantities();
         generateOrderText();
-        System.out.println("\nNote: Above order exported to Order.txt.\n");
+        System.out.println("\nNote: Above order exported to order.txt.\n");
       } else
         System.out.println("*** No order was created for the day. ***\n");
     }

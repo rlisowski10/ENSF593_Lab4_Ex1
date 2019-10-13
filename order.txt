@@ -1,5 +1,5 @@
 **********************************************************************
-ORDER ID:		53997
+ORDER ID:		26701
 Date Ordered:		October 13, 2019
 
 Item description:	Widgets
@@ -45,4 +45,29 @@ Supplier:		Fiddleys Makes Stuff Inc.
 Item description:	Tin Wits
 Amount ordered:		27
 Supplier:		Tic Tac Manufacturing
+**********************************************************************
+ORDER ID:		58363
+Date Ordered:		October 14, 2019
+
+Item description:	Knock Bits
+Amount ordered:		12
+Supplier:		Knock Knock Inc.
+
+Item description:	Widgets
+Amount ordered:		25
+Supplier:		Winork Manufacturing Inc.
+**********************************************************************
+ORDER ID:		10648
+Date Ordered:		October 15, 2019
+
+Item description:	Knock Bits
+Amount ordered:		25
+Supplier:		Knock Knock Inc.
+**********************************************************************
+ORDER ID:		58669
+Date Ordered:		October 18, 2019
+
+Item description:	Knock Bits
+Amount ordered:		50
+Supplier:		Knock Knock Inc.
 **********************************************************************
